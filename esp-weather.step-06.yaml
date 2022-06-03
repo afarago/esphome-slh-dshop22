@@ -1,0 +1,71 @@
+### DEVICE BASE #############################################################
+esphome:
+  name: esp-weather
+
+esp8266:
+  board: d1_mini
+
+ota:
+  safe_mode: True
+
+logger:
+  level: debug
+
+web_server:
+
+wifi:
+  networks:
+    - ssid: SAP-Guest
+    - ssid: !secret wifi_ssid
+      password: !secret wifi_password
+
+i2c:
+  # sda: 21 D2
+  # scl: 22 D1
+  scan: true
+  id: bus_a
+
+time:
+  ### INTERNET TIME
+  - platform: sntp
+    id: sntp_time
+
+sensor:
+  ### DHT11 sensor ################################
+  - platform: dht
+    pin:
+      number: D4
+      mode:
+        pullup: true
+        input: true
+    temperature:
+      name: "DHT Temperature"
+      id: dht_temperature
+      device_class: temperature
+      icon: mdi:temperature-celsius
+      unit_of_measurement: °C
+    humidity:
+      name: "DHT Humidity"
+      id: dht_humidity
+      device_class: humidity
+      icon: mdi:water-percent
+      unit_of_measurement: "%"
+    model: DHT11
+    update_interval: 15s
+
+  ### BMP180
+  - platform: bmp085
+    # address: 0x77
+    temperature:
+      name: "Internal Temperature"
+      id: "internal_temperature"
+    pressure:
+      name: "Internal Pressure"
+      id: "internal_pressure"
+    update_interval: 60s
+
+interval:
+  ### DUMMY Hello World
+  - interval: 10s
+    then:
+      - logger.log: "Hello World"

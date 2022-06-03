@@ -1,0 +1,12 @@
+### DEVICE BASE #############################################################
+esphome:
+  name: esp-weather
+
+esp8266:
+  board: d1_mini
+
+ota:
+  safe_mode: True
+
+logger:
+  level: debug
