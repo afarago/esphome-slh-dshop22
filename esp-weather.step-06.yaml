@@ -15,7 +15,7 @@ web_server:
 
 wifi:
   networks:
-    - ssid: SAP-Guest
+    # - ssid: SAP-Guest
     - ssid: !secret wifi_ssid
       password: !secret wifi_password
 
