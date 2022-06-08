@@ -5,8 +5,8 @@ esphome:
 esp8266:
   board: d1_mini
 
-ota:
-  safe_mode: True
+# ota:
+#   safe_mode: True
 
 logger:
   level: debug
